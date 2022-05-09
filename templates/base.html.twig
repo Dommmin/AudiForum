@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl_PL">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Audi Forum{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#974e4e;">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="{{ path('app_index') }}"><i class="fas fa-car-side"></i>Audi Forum</a>
+
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                </ul>
+
+                <!-- Search -->
+                <form class="w-auto">
+                    <input type="search" class="form-control" placeholder="Type query" aria-label="Search">
+                </form>
+
+            </div>
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+        {% block body %}{% endblock %}
+    </body>
+</html>
