@@ -3,5 +3,34 @@
 {% block title %}Strona główna - {{ parent() }}{% endblock %}
 
 {% block body %}
+    <div class="container text-center">
+        <div>
+            <h1>Wybierz swój samochód</h1>
+        </div>
 
+        {% for car in cars %}
+
+            <div class="mt-2">
+                <button
+                        class="btn btn-success fs-3 fw-bold"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample1"
+                        aria-expanded="false"
+                        aria-controls="collapseExample1"
+                >
+                        {{ car.name }}
+                </button>
+                <div class="collapse" id="collapseExample1">
+                    <div class="mt-2">
+                        <h4>
+                            {% for model in car.model %}
+                                <a class="text-decoration-none link-info" href="{{ car.slug }}/{{ model.name }}">{{ model.name }}</a>
+                            {% endfor %}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

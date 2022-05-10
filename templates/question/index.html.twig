@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Question - {{ parent() }}{% endblock %}
+
+
+{% block body %}
+    <div class="container mt-5 mb-5">
+        <div class="row shadow-lg mb-5">
+            <div class="col-2 border-end text-center">
+                <p>Admin</p>
+                <p>tekst</p>
+            </div>
+            <div class="col">
+                {% for question in questions %}
+                    <h1>{{ question.name }}</h1>
+                    <p class="small">Admin {{ question.askedAt|date('d.m.Y') }}</p>
+                    <p class="fs-6 fst-italic">{{ question.question }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+            <div class="row">
+{#                <div class="col-2">#}
+{#                    <p>Użytkownik</p>#}
+{#                    <p>tekst</p>#}
+{#                </div>#}
+                <div class="col">
+                    {% for answer in answers %}
+                        <div class="mt-5 border">
+                            <p class="ms-2"> {{ answer.answeredAt|date('d.m.Y, H:i') }}</p>
+                            <p class="ms-2 me-3"> {{ answer.content }}</p>
+                        </div>
+
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+        <div class="mt-5 d-flex justify-content-end">
+            <button class="fs-5 btn btn-success" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Dodaj komentarz
+            </button>
+        </div>
+        <div class="container mb-5 d-flex bottom-0 justify-content-center fixed-bottom">
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    {{ form_start(answer) }}
+                        {{ form_widget(answer) }}
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary ">Dodaj</button>
+                        </div>
+                    {{ form_end(answer) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

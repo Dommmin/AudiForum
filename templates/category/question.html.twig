@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="mt-5 d-flex flex-column justify-content-center align-items-center">
+            <div class="mb-3">
+                <h1 class="">Nowy Temat</h1>
+            </div>
+
+            {{ form_start(question) }}
+            <div class="">
+                {{ form_row(question.name) }}
+            </div>
+
+            <div>
+                {{ form_row(question.question) }}
+            </div>
+            <button type="submit" class="btn btn-success">
+                Wyślij
+            </button>
+            {{ form_end(question) }}
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
