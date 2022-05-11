@@ -27,6 +27,9 @@ class Question
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $askedAt;
 
+    #[ORM\ManyToOne(targetEntity: Model::class, inversedBy: 'question')]
+    private $model;
+
 
     public function getId(): ?int
     {
@@ -100,6 +103,18 @@ class Question
                 $answer->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
+
+    public function setModel(?Model $model): self
+    {
+        $this->model = $model;
 
         return $this;
     }
