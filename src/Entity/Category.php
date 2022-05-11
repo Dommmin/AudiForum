@@ -35,9 +35,6 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Question::class)]
     private $questions;
 
-    #[ORM\ManyToOne(targetEntity: Model::class, inversedBy: 'category')]
-    private $model;
-
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -134,18 +131,6 @@ class Category
                 $question->setCategory(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getModel(): ?Model
-    {
-        return $this->model;
-    }
-
-    public function setModel(?Model $model): self
-    {
-        $this->model = $model;
 
         return $this;
     }
