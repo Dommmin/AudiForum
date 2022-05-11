@@ -160,90 +160,62 @@ class AppFixtures extends Fixture
         $question10->setAskedAt(new \DateTime());
 
         /* categories */
-        $category = new Category();
-        $category->setName('Twoje Audi');
-
-        $category2 = new Category();
-        $category2->setName('Silniki benzynowe');
-
-        $category3 = new Category();
-        $category3->setName('Silniki wysokoprężne');
-
-        $category4 = new Category();
-        $category4->setName('Skrzynia biegów i układ napędowy');
-
-        $category5 = new Category();
-        $category5->setName('Zawieszenie');
-
-        $category6 = new Category();
-        $category6->setName('Elektryka');
-
-        $category7 = new Category();
-        $category7->setName('Nadwozie');
-
-        $category8 = new Category();
-        $category8->setName('Wnętrze');
-
-        $category9 = new Category();
-        $category9->setName('Układ chłodzenia, klimatyzacja oraz ogrzewanie');
-
-        $category10 = new Category();
-        $category10->setName('Układ hamulcowy');
-
-        $category11 = new Category();
-        $category11->setName('Koła');
-
-        $category12 = new Category();
-        $category12->setName('Nagłośnienie');
-
-        $category13 = new Category();
-        $category13->setName('Tuning wizualny');
-
-        $category14 = new Category();
-        $category14->setName('Tuning mechaniczny');
-
-        /* subcategories */
         $general = new General();
-        $general->addCategory($category);
+        $general->setName('Twoje Audi');
+        $general->addModel($model1);
+        $general->addModel($model2);
+        $general->addQuestion($question);
+        $general->addQuestion($question2);
+//        $category->addModel($model1);
+//        $category->addModel($model2);
+//        $category->addModel($model3);
+//        $category->addModel($model4);
 
         $technical = new Technical();
-        $technical->addCategory($category2);
+        $technical->setName('Silniki benzynowe');
+        $technical->addModel($model1);
+        $technical->addQuestion($question3);
 
-        $technical2 = new Technical();
-        $technical2->addCategory($category3);
+//
+//        $category3 = new Category();
+//        $category3->setName('Silniki wysokoprężne');
+//        $category3->addModel($model1);
+//
+//        $category4 = new Category();
+//        $category4->setName('Skrzynia biegów i układ napędowy');
+//        $category4->addModel($model1);
+//
+//        $category5 = new Category();
+//        $category5->setName('Zawieszenie');
+//
+//        $category6 = new Category();
+//        $category6->setName('Elektryka');
+//
+//        $category7 = new Category();
+//        $category7->setName('Nadwozie');
+//
+//        $category8 = new Category();
+//        $category8->setName('Wnętrze');
+//
+//        $category9 = new Category();
+//        $category9->setName('Układ chłodzenia, klimatyzacja oraz ogrzewanie');
+//
+//        $category10 = new Category();
+//        $category10->setName('Układ hamulcowy');
+//
+//        $category11 = new Category();
+//        $category11->setName('Koła');
+//
+//        $category12 = new Category();
+//        $category12->setName('Nagłośnienie');
+//
+//        $category13 = new Category();
+//        $category13->setName('Tuning wizualny');
+//
+//        $category14 = new Category();
+//        $category14->setName('Tuning mechaniczny');
 
-        $technical3 = new Technical();
-        $technical3->addCategory($category4);
 
-        $technical4 = new Technical();
-        $technical4->addCategory($category5);
-
-        $technical5 = new Technical();
-        $technical5->addCategory($category6);
-
-        $technical6 = new Technical();
-        $technical6->addCategory($category7);
-
-        $technical7 = new Technical();
-        $technical7->addCategory($category8);
-
-        $technical8 = new Technical();
-        $technical8->addCategory($category9);
-
-        $technical9 = new Technical();
-        $technical9->addCategory($category10);
-
-        $technical10 = new Technical();
-        $technical10->addCategory($category11);
-
-        $technical11 = new Technical();
-        $technical11->addCategory($category12);
-
-        $tuning = new Tuning();
-        $tuning->addCategory($category13);
-
-        $tuning2 = new Tuning();
-        $tuning2->addCategory($category14);
 
 
         $manager->persist($car1);
@@ -264,34 +236,20 @@ class AppFixtures extends Fixture
         $manager->persist($model10);
         $manager->persist($model11);
         $manager->persist($model12);
-        $manager->persist($category);
-        $manager->persist($category2);
-        $manager->persist($category3);
-        $manager->persist($category4);
-        $manager->persist($category5);
-        $manager->persist($category6);
-        $manager->persist($category7);
-        $manager->persist($category8);
-        $manager->persist($category9);
-        $manager->persist($category10);
-        $manager->persist($category11);
-        $manager->persist($category12);
-        $manager->persist($category13);
-        $manager->persist($category14);
         $manager->persist($general);
         $manager->persist($technical);
-        $manager->persist($technical2);
-        $manager->persist($technical3);
-        $manager->persist($technical4);
-        $manager->persist($technical5);
-        $manager->persist($technical6);
-        $manager->persist($technical7);
-        $manager->persist($technical8);
-        $manager->persist($technical9);
-        $manager->persist($technical10);
-        $manager->persist($technical11);
-        $manager->persist($tuning);
-        $manager->persist($tuning2);
+//        $manager->persist($category3);
+//        $manager->persist($category4);
+//        $manager->persist($category5);
+//        $manager->persist($category6);
+//        $manager->persist($category7);
+//        $manager->persist($category8);
+//        $manager->persist($category9);
+//        $manager->persist($category10);
+//        $manager->persist($category11);
+//        $manager->persist($category12);
+//        $manager->persist($category13);
+//        $manager->persist($category14);
         $manager->persist($question);
         $manager->persist($question2);
         $manager->persist($question3);

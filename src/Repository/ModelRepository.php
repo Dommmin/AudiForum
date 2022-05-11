@@ -47,6 +47,16 @@ class ModelRepository extends ServiceEntityRepository
         }
     }
 
+    public function findOneByName($name)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
 //    /**
 //     * @return Model[] Returns an array of Model objects

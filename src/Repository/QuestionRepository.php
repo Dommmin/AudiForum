@@ -44,11 +44,31 @@ class QuestionRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('m')
             ->where('m.slug = :slug')
             ->setParameter('slug', $slug)
+            ->leftJoin('m.general', 'general')
+            ->addSelect('general')
             ->getQuery()
             ->getResult()
             ;
     }
 
+    public function findGeneralQuestions()
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.general != :identifier')
+            ->setParameter('identifier', 1)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findTechnicalQuestions($slug)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.slug = :slug')
+            ->setParameter('slug', $slug)
+//            ->andwhere('c.technical = 2')
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Question[] Returns an array of Question objects

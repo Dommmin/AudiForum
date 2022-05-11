@@ -4,42 +4,45 @@
 
 {% block body %}
     <div class="container-fluid">
-
         <div class="mt-5 mb-5 me-5 ms-5 justify-content-center border border-4 border-dark">
 
             <div class="bg-dark bg-gradient text-light text-center">
                 <p class="fs-6 m-auto p-1">Ogólny</p>
             </div>
 
-            {% for category in generals %}
-                <div class="bg-dark bg-gradient bg-opacity-75">
-                    <a href="{{ category.slug }}" class="link-danger fs-3 text-decoration-none ms-2">{{ category.name }}</a>
-                    <p class="small text-break text-muted ms-2">( Przedstaw się i zaprezentuj swoje auto )</p>
-                </div>
+            {% for model in models %}
+                {% for general in model.general %}
+                    <div class="bg-dark bg-gradient bg-opacity-75">
+                        <a href="{{ general.slug }}" class="link-danger fs-3 text-decoration-none ms-2">{{ general.name }}</a>
+                        <p class="small text-break text-muted ms-2">( Przedstaw się i zaprezentuj swoje auto )</p>
+                    </div>
+                {% endfor %}
             {% endfor %}
-
 
             <div class="bg-dark bg-gradient text-light text-center">
                 <p class="fs-6 m-auto p-1">Dział Techniczny</p>
             </div>
 
-            {% for category in technicals %}
-                <div class="bg-dark bg-gradient bg-opacity-75">
-                    <a href="{{ category.slug }}" class="link-info fs-3 text-decoration-none ms-2">{{ category.name }}</a>
-                    <p class="small text-break text-muted ms-2">( Wszystko na ten temat )</p>
-                </div>
+            {% for model in models %}
+                {% for technical in model.technical %}
+                    <div class="bg-dark bg-gradient bg-opacity-75">
+                        <a href="{{ technical.slug }}" class="link-info fs-3 text-decoration-none ms-2">{{ technical.name }}</a>
+                        <p class="small text-break text-muted ms-2">( Wszystko na ten temat )</p>
+                    </div>
+                {% endfor %}
             {% endfor %}
-
 
             <div class="bg-dark bg-gradient text-light text-center ">
                 <p class="fs-6 m-auto p-1">Tuning</p>
             </div>
 
-            {% for category in tunings %}
-                <div class="bg-dark bg-gradient bg-opacity-75">
-                    <a href="{{ category.slug }}" class="link-warning fs-3 text-decoration-none ms-2">{{ category.name }}</a>
-                    <p class="small text-break text-muted ms-2">( Wszystko związane z tuningiem )</p>
-                </div>
+            {% for model in models %}
+                {% for tuning in model.tuning %}
+                    <div class="bg-dark bg-gradient bg-opacity-75">
+                        <a href="{{ tuning.slug }}" class="link-warning fs-3 text-decoration-none ms-2">{{ tuning.name }}</a>
+                        <p class="small text-break text-muted ms-2">( Wszystko na ten tuningu )</p>
+                    </div>
+                {% endfor %}
             {% endfor %}
 
         </div>

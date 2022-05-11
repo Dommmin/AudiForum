@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\QuestionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 
@@ -29,16 +27,18 @@ class Question
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $askedAt;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'questions')]
-    private $category;
 
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class)]
     private $answers;
 
-    public function __construct()
-    {
-        $this->answers = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(targetEntity: General::class, inversedBy: 'questions')]
+    private $general;
+
+    #[ORM\ManyToOne(targetEntity: Technical::class, inversedBy: 'questions')]
+    private $technical;
+
+    #[ORM\ManyToOne(targetEntity: Tuning::class, inversedBy: 'questions')]
+    private $tuning;
 
     public function getId(): ?int
     {
@@ -93,25 +93,6 @@ class Question
         return $this;
     }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Answer>
-     */
-    public function getAnswers(): Collection
-    {
-        return $this->answers;
-    }
 
     public function addAnswer(Answer $answer): self
     {
@@ -131,6 +112,42 @@ class Question
                 $answer->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGeneral(): ?General
+    {
+        return $this->general;
+    }
+
+    public function setGeneral(?General $general): self
+    {
+        $this->general = $general;
+
+        return $this;
+    }
+
+    public function getTechnical(): ?Technical
+    {
+        return $this->technical;
+    }
+
+    public function setTechnical(?Technical $technical): self
+    {
+        $this->technical = $technical;
+
+        return $this;
+    }
+
+    public function getTuning(): ?Tuning
+    {
+        return $this->tuning;
+    }
+
+    public function setTuning(?Tuning $tuning): self
+    {
+        $this->tuning = $tuning;
 
         return $this;
     }

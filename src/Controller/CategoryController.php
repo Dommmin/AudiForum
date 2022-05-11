@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Question;
 use App\Form\QuestionType;
-use App\Repository\CategoryRepository;
+use App\Repository\GeneralRepository;
+use App\Repository\ModelRepository;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,27 +16,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     #[Route('/{slug}/{name}/', name: 'app_car')]
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(string $name, ModelRepository $modelRepository): Response
     {
-        $generals = $categoryRepository->findGenerals();
-
-        $technicals = $categoryRepository->findTechnicals();
-
-        $tunings = $categoryRepository->findTunings();
+        $models = $modelRepository->findOneByName($name);
 
         return $this->render('car/index.html.twig', [
-            'generals' => $generals,
-            'technicals' => $technicals,
-            'tunings' => $tunings,
+
+            'models' => $models,
         ]);
     }
 
-    #[Route('/{slug}/{name}/{category}/', name: 'app_category')]
-    public function view(QuestionRepository $questionRepository): Response
+    #[Route('/{slug}/{name}/{general}/', name: 'app_category')]
+    public function view(QuestionRepository $questionRepository, string $general, GeneralRepository $generalRepository): Response
     {
-        $questions = $questionRepository->findBy([], ['id' => 'desc']);
+        $g_questions = $questionRepository->findGeneralQuestions();
+        $questions = $generalRepository->findGeneralQuestions($general);
 
         return $this->render('category/index.html.twig', [
+            'g_questions' => $g_questions,
             'questions' => $questions,
         ]);
     }
