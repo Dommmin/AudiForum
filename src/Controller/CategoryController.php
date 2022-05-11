@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Question;
 use App\Form\QuestionType;
-use App\Repository\GeneralRepository;
-use App\Repository\ModelRepository;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,30 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     #[Route('/{slug}/{name}/', name: 'app_car')]
-    public function index(string $name, ModelRepository $modelRepository): Response
+    public function index(QuestionRepository $questionRepository): Response
     {
-        $models = $modelRepository->findOneByName($name);
+        $questions = $questionRepository->findAll();
 
         return $this->render('car/index.html.twig', [
-
-            'models' => $models,
+            'questions' => $questions
         ]);
     }
 
-    #[Route('/{slug}/{name}/{general}/', name: 'app_category')]
-    public function view(QuestionRepository $questionRepository, string $general, GeneralRepository $generalRepository): Response
-    {
-        $g_questions = $questionRepository->findGeneralQuestions();
-        $questions = $generalRepository->findGeneralQuestions($general);
-
-        return $this->render('category/index.html.twig', [
-            'g_questions' => $g_questions,
-            'questions' => $questions,
-        ]);
-    }
-
-    #[Route('/{slug}/{name}/{category}/nowy/temat', name: 'app_questions')]
-    public function post(Request $request, EntityManagerInterface $entityManager, string $slug, string $name, string $category): Response
+    #[Route('/{slug}/{name}/nowy/temat', name: 'app_questions')]
+    public function post(Request $request, EntityManagerInterface $entityManager, string $slug, string $name): Response
     {
         $form = $this->createForm(QuestionType::class);
 
@@ -55,10 +40,9 @@ class CategoryController extends AbstractController
             $entityManager->persist($question);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_category', [
+            return $this->redirectToRoute('app_car', [
                 'slug' => $slug,
                 'name' => $name,
-                'category' => $category,
             ]);
         }
 

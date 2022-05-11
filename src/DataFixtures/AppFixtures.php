@@ -3,12 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Car;
-use App\Entity\Category;
-use App\Entity\General;
 use App\Entity\Model;
 use App\Entity\Question;
-use App\Entity\Technical;
-use App\Entity\Tuning;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -160,21 +156,13 @@ class AppFixtures extends Fixture
         $question10->setAskedAt(new \DateTime());
 
         /* categories */
-        $general = new General();
-        $general->setName('Twoje Audi');
-        $general->addModel($model1);
-        $general->addModel($model2);
-        $general->addQuestion($question);
-        $general->addQuestion($question2);
+
 //        $category->addModel($model1);
 //        $category->addModel($model2);
 //        $category->addModel($model3);
 //        $category->addModel($model4);
 
-        $technical = new Technical();
-        $technical->setName('Silniki benzynowe');
-        $technical->addModel($model1);
-        $technical->addQuestion($question3);
+
 
 //
 //        $category3 = new Category();
@@ -236,8 +224,7 @@ class AppFixtures extends Fixture
         $manager->persist($model10);
         $manager->persist($model11);
         $manager->persist($model12);
-        $manager->persist($general);
-        $manager->persist($technical);
+
 //        $manager->persist($category3);
 //        $manager->persist($category4);
 //        $manager->persist($category5);

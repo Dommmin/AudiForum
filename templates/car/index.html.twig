@@ -1,51 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Audi A7 | 4G - {{ parent() }}{% endblock %}
+{% block title %}Audi  - {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
-        <div class="mt-5 mb-5 me-5 ms-5 justify-content-center border border-4 border-dark">
+        <div class="mt-2 ms-5 fs-4">
+            <a
+                href="{{ path('app_questions', {slug: 'slug', name: 'name'}) }}"
+                class="btn btn-danger mb-3"
+            >
+                <i class="fas fa-pencil-alt fa-xs"></i> <u class="text-decoration-none fw-bold">Dodaj wątek</u>
+            </a>
+        </div>
+
+        <div class="mb-5 me-5 ms-5 justify-content-center border border-4 border-dark">
 
             <div class="bg-dark bg-gradient text-light text-center">
-                <p class="fs-6 m-auto p-1">Ogólny</p>
+                <p class="fs-6 m-auto p-1">Wszystko związane z </p>
             </div>
 
-            {% for model in models %}
-                {% for general in model.general %}
-                    <div class="bg-dark bg-gradient bg-opacity-75">
-                        <a href="{{ general.slug }}" class="link-danger fs-3 text-decoration-none ms-2">{{ general.name }}</a>
-                        <p class="small text-break text-muted ms-2">( Przedstaw się i zaprezentuj swoje auto )</p>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-
-            <div class="bg-dark bg-gradient text-light text-center">
-                <p class="fs-6 m-auto p-1">Dział Techniczny</p>
-            </div>
-
-            {% for model in models %}
-                {% for technical in model.technical %}
-                    <div class="bg-dark bg-gradient bg-opacity-75">
-                        <a href="{{ technical.slug }}" class="link-info fs-3 text-decoration-none ms-2">{{ technical.name }}</a>
-                        <p class="small text-break text-muted ms-2">( Wszystko na ten temat )</p>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-
-            <div class="bg-dark bg-gradient text-light text-center ">
-                <p class="fs-6 m-auto p-1">Tuning</p>
-            </div>
-
-            {% for model in models %}
-                {% for tuning in model.tuning %}
-                    <div class="bg-dark bg-gradient bg-opacity-75">
-                        <a href="{{ tuning.slug }}" class="link-warning fs-3 text-decoration-none ms-2">{{ tuning.name }}</a>
-                        <p class="small text-break text-muted ms-2">( Wszystko na ten tuningu )</p>
-                    </div>
-                {% endfor %}
+            {% for question in questions %}
+                <div class="bg-dark bg-gradient bg-opacity-75">
+                    <a href="#" class="link-warning fs-3 text-decoration-none ms-2">{{ question.name }}</a>
+                    <p class="small text-break text-muted ms-2">( Przedstaw się i zaprezentuj swoje auto )</p>
+                </div>
             {% endfor %}
 
         </div>
     </div>
+
 
 {% endblock %}

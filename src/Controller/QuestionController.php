@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Answer;
-use App\Entity\Question;
 use App\Form\AnswerType;
-use App\Form\QuestionType;
 use App\Repository\AnswerRepository;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;

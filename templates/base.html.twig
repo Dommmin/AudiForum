@@ -61,6 +61,16 @@
         <!-- Container wrapper -->
     </nav>
     <!-- Navbar -->
+    <div class="container-fluid ms-5 fs-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_index') }}" class="text-white">Home</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-white">Library</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Data</li>
+            </ol>
+        </nav>
+    </div>
+
 
         {% block body %}{% endblock %}
     </body>

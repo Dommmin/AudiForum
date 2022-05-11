@@ -25,7 +25,9 @@
                     <div class="mt-2">
                         <h4>
                             {% for model in car.model %}
+
                                 <a class="text-decoration-none link-info" href="{{ car.slug }}/{{ model.name }}">{{ model.name }}</a>
+
                             {% endfor %}
                         </h4>
                     </div>
