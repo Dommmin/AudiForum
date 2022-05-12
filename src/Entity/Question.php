@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\QuestionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 
@@ -30,6 +32,13 @@ class Question
     #[ORM\ManyToOne(targetEntity: Model::class, inversedBy: 'question')]
     private $model;
 
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class)]
+    private $answers;
+
+    public function __construct()
+    {
+        $this->answers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,12 +69,12 @@ class Question
         return $this;
     }
 
-    public function getQuestion(): ?string
+    public function getQuestion()
     {
         return $this->question;
     }
 
-    public function setQuestion(string $question): self
+    public function setQuestion($question): self
     {
         $this->question = $question;
 
@@ -84,6 +93,25 @@ class Question
         return $this;
     }
 
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
+
+    public function setModel(?Model $model): self
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Answer>
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
 
     public function addAnswer(Answer $answer): self
     {
@@ -103,18 +131,6 @@ class Question
                 $answer->setQuestion(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getModel(): ?Model
-    {
-        return $this->model;
-    }
-
-    public function setModel(?Model $model): self
-    {
-        $this->model = $model;
 
         return $this;
     }

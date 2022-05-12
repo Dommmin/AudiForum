@@ -47,9 +47,11 @@ class ModelRepository extends ServiceEntityRepository
         }
     }
 
-    public function findOneByName($name)
+    public function findOneByModel($name)
     {
         return $this->createQueryBuilder('m')
+            ->leftJoin('m.question', 'question')
+            ->addSelect('question')
             ->where('m.name = :name')
             ->setParameter('name', $name)
             ->getQuery()

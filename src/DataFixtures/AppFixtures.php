@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Answer;
 use App\Entity\Car;
 use App\Entity\Model;
 use App\Entity\Question;
@@ -60,6 +61,7 @@ class AppFixtures extends Fixture
         $model1->setName('8V');
         $model1->setCar($car1);
 
+
         $model2 = new Model();
         $model2->setName('8Y');
         $model2->setCar($car1);
@@ -109,6 +111,7 @@ class AppFixtures extends Fixture
         $question->setName('Lorem Ipsum');
         $question->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question->setAskedAt(new \DateTime());
+        $model1->addQuestion($question);
 
         $question2 = new Question();
         $question2->setName('Lorem Ipsum');
@@ -155,55 +158,13 @@ class AppFixtures extends Fixture
         $question10->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question10->setAskedAt(new \DateTime());
 
-        /* categories */
 
-//        $category->addModel($model1);
-//        $category->addModel($model2);
-//        $category->addModel($model3);
-//        $category->addModel($model4);
+        /* answers */
 
-
-
-//
-//        $category3 = new Category();
-//        $category3->setName('Silniki wysokoprężne');
-//        $category3->addModel($model1);
-//
-//        $category4 = new Category();
-//        $category4->setName('Skrzynia biegów i układ napędowy');
-//        $category4->addModel($model1);
-//
-//        $category5 = new Category();
-//        $category5->setName('Zawieszenie');
-//
-//        $category6 = new Category();
-//        $category6->setName('Elektryka');
-//
-//        $category7 = new Category();
-//        $category7->setName('Nadwozie');
-//
-//        $category8 = new Category();
-//        $category8->setName('Wnętrze');
-//
-//        $category9 = new Category();
-//        $category9->setName('Układ chłodzenia, klimatyzacja oraz ogrzewanie');
-//
-//        $category10 = new Category();
-//        $category10->setName('Układ hamulcowy');
-//
-//        $category11 = new Category();
-//        $category11->setName('Koła');
-//
-//        $category12 = new Category();
-//        $category12->setName('Nagłośnienie');
-//
-//        $category13 = new Category();
-//        $category13->setName('Tuning wizualny');
-//
-//        $category14 = new Category();
-//        $category14->setName('Tuning mechaniczny');
-
-
+        $answer = new Answer();
+        $answer->setContent('Will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose.');
+        $answer->setAnsweredAt(new \DateTime());
+        $answer->setQuestion($question);
 
 
         $manager->persist($car1);
@@ -224,19 +185,9 @@ class AppFixtures extends Fixture
         $manager->persist($model10);
         $manager->persist($model11);
         $manager->persist($model12);
+        $manager->persist($answer);
 
-//        $manager->persist($category3);
-//        $manager->persist($category4);
-//        $manager->persist($category5);
-//        $manager->persist($category6);
-//        $manager->persist($category7);
-//        $manager->persist($category8);
-//        $manager->persist($category9);
-//        $manager->persist($category10);
-//        $manager->persist($category11);
-//        $manager->persist($category12);
-//        $manager->persist($category13);
-//        $manager->persist($category14);
+
         $manager->persist($question);
         $manager->persist($question2);
         $manager->persist($question3);

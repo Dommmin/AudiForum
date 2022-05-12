@@ -39,6 +39,18 @@ class AnswerRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAnswers($question)
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('m.question', 'question')
+            ->addSelect('question')
+            ->where('m.question = :question')
+            ->setParameter('question', $question)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 //    /**
 //     * @return Answer[] Returns an array of Answer objects
 //     */

@@ -1,12 +1,17 @@
 <?php
 
+
 namespace App\Controller;
 
 use App\Entity\Answer;
+use App\Entity\Model;
+use App\Entity\Question;
 use App\Form\AnswerType;
+use App\Form\QuestionType;
 use App\Repository\AnswerRepository;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,12 +19,43 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class QuestionController extends AbstractController
 {
-    #[Route('/{slug}/{name}/{category}/{question}', name: 'question')]
-    public function index(QuestionRepository $questionRepository, string $question, Request $request, EntityManagerInterface $entityManager, string $slug, $name, $category, AnswerRepository $answerRepository): Response
+    #[Route('/{slug}/{name}/new_question', name: 'new_question')]
+    public function new(Request $request, EntityManagerInterface $entityManager, string $slug, string $name, Model $model): Response
     {
-        $questions = $questionRepository->findOneBySlug($question);
+        $form = $this->createForm(QuestionType::class);
 
-        $answers = $answerRepository->findAll();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $question = new Question();
+            $question->setName($data->getName());
+            $question->setQuestion($data->getQuestion());
+            $question->setAskedAt(new \DateTime());
+            $question->setModel($model);
+
+            $entityManager->persist($question);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_car', [
+                'slug' => $slug,
+                'name' => $name,
+                'model' => $model,
+            ]);
+        }
+
+        return $this->render('category/question.html.twig', [
+            'question' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/{car}/{name}/show/{slug}', name: 'show_question')]
+    #[ParamConverter('question', class: Question::class, options: ['mapping' => ['slug' => 'slug']])]
+    public function show(Question $question, QuestionRepository $questionRepository, Request $request, EntityManagerInterface $entityManager, string $slug, string $name, string $car, AnswerRepository $answerRepository): Response
+    {
+        $questions = $questionRepository->findOneBySlug($slug);
+
+        $answers = $answerRepository->findAnswers($slug);
 
         $form = $this->createForm(AnswerType::class);
 
@@ -30,15 +66,15 @@ class QuestionController extends AbstractController
             $answer = new Answer();
             $answer->setContent($data->getContent());
             $answer->setAnsweredAt(new \DateTime);
+            $answer->setQuestion($question);
 
             $entityManager->persist($answer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('question', [
+            return $this->redirectToRoute('show_question', [
                 'slug' => $slug,
                 'name' => $name,
-                'category' => $category,
-                'question' => $question,
+                'car' => $car,
             ]);
         }
 

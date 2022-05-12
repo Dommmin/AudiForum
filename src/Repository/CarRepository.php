@@ -58,6 +58,16 @@ class CarRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findOneByCar($slug)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 //    /**
 //     * @return Car[] Returns an array of Car objects
 //     */

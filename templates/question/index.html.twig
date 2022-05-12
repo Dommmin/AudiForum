@@ -11,13 +11,12 @@
                 <p>Admin</p>
                 <p>tekst</p>
             </div>
-            <div class="col">
-                {% for question in questions %}
+            {% for question in questions %}
+                <div class="col">
                     <h1>{{ question.name }}</h1>
                     <p class="small">Admin {{ question.askedAt|date('d.m.Y') }}</p>
                     <p class="fs-6 fst-italic">{{ question.question }}</p>
-                {% endfor %}
-            </div>
+                </div>
         </div>
 
             <div class="row">
@@ -26,12 +25,13 @@
 {#                    <p>tekst</p>#}
 {#                </div>#}
                 <div class="col">
-                    {% for answer in answers %}
-                        <div class="mt-5 border">
-                            <p class="ms-2"> {{ answer.answeredAt|date('d.m.Y, H:i') }}</p>
-                            <p class="ms-2 me-3"> {{ answer.content }}</p>
-                        </div>
 
+                        {% for answer in question.answers %}
+                            <div class="mt-5 border">
+                                <p class="ms-2"> {{ answer.answeredAt|date('d.m.Y, H:i') }}</p>
+                                <p class="ms-2 me-3"> {{ answer.content }}</p>
+                            </div>
+                        {% endfor %}
                     {% endfor %}
                 </div>
 
@@ -55,6 +55,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 
 {% endblock %}

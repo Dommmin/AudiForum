@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Answer{% endblock %}
+
+{% block body %}
+
+<div class="container mb-5 d-flex bottom-0 justify-content-center fixed-bottom">
+        <div class="card card-body">
+            {{ form_start(answer) }}
+                {{ form_widget(answer) }}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary ">Dodaj</button>
+                </div>
+            {{ form_end(answer) }}
+        </div>
+</div>
+
+{% endblock %}
