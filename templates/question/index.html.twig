@@ -15,7 +15,7 @@
                         </div>
                     {% endif %}
                 </u>
-                <p class="mb-1"><small></small> {{ question.owner.mycar }}</p>
+                <p class="mb-1"><small>{{ question.owner.mycar }}</small> </p>
             </div>
 
             <div class="col text-dark bg-gradient">
@@ -36,7 +36,7 @@
                                 <p class="text-dark mb-0 mt-0 bg-danger bg-gradient col-2 text-center">Administrator</p>
                             </div>
                         {% endif %}</u>
-                    <p class="mb-0"><small></small> {{ answer.owner.mycar }}</p>
+                    <p class="mb-0"><small>{{ answer.owner.mycar }}</small> </p>
                 </div>
                 <div class="col shadow small">
                     <small class="badge d-flex justify-content-end">{{ answer.answeredAt|date('d.m.Y, H:i') }}</small>
