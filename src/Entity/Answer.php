@@ -22,17 +22,21 @@ class Answer
     #[ORM\ManyToOne(targetEntity: Question::class, inversedBy: 'answers')]
     private $question;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'answers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $owner;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function setContent($content): self
+    public function setContent(string $content): self
     {
         $this->content = $content;
 
@@ -61,5 +65,15 @@ class Answer
         $this->question = $question;
 
         return $this;
+    }
+
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    public function setOwner($owner): void
+    {
+        $this->owner = $owner;
     }
 }

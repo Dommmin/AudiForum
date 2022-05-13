@@ -35,6 +35,10 @@ class Question
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class)]
     private $answers;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'questions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $owner;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
@@ -69,12 +73,12 @@ class Question
         return $this;
     }
 
-    public function getQuestion()
+    public function getQuestion(): ?string
     {
         return $this->question;
     }
 
-    public function setQuestion($question): self
+    public function setQuestion(string $question): self
     {
         $this->question = $question;
 
@@ -133,5 +137,15 @@ class Question
         }
 
         return $this;
+    }
+
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    public function setOwner($owner): void
+    {
+        $this->owner = $owner;
     }
 }

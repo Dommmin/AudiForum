@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zarejestruj się! - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-center">Zarejestruj się!</h1>
+    {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.name) }}
+    {{ form_row(registrationForm.myCar) }}
+    {{ form_row(registrationForm.plainPassword) }}
+    {{ form_row(registrationForm.agreeTerms) }}
+
+    <button type="submit" class="btn btn-primary">Rejestruj!</button>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

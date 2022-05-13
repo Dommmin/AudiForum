@@ -82,6 +82,9 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/sql-formatter" />
       <path value="$PROJECT_DIR$/vendor/friendsofphp/proxy-manager-lts" />
       <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/friendsofsymfony/ckeditor-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/vendor/pagerfanta/pagerfanta" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

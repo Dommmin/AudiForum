@@ -1,62 +1,69 @@
 {% extends 'base.html.twig' %}
 
-
-{% block title %}Question - {{ parent() }}{% endblock %}
-
+{% block title %}{% for question in pager %} {{ question.name }}{% endfor %} - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="container mt-5 mb-5">
-        <div class="row shadow-lg mb-5">
-            <div class="col-2 border-end text-center">
-                <p>Admin</p>
-                <p>tekst</p>
+<div class="container mt-5 mb-5">
+    <div class="row shadow-lg mb-5 rounded-2">
+        {% for question in pager %}
+            <div class="row-cols-auto text-center bg-gradient bg-dark text-light rounded-3">
+                <u class="text-decoration-none fw-bold">
+                    {{ question.owner.name }}
+                    {% if question.owner.name == 'Admin' %}
+                        <div class="d-flex justify-content-center text-center">
+                            <p class="text-dark mb-0 mt-0 bg-danger bg-gradient col-2 text-center">Administrator</p>
+                        </div>
+                    {% endif %}
+                </u>
+                <p class="mb-1"><small></small> {{ question.owner.mycar }}</p>
             </div>
-            {% for question in questions %}
-                <div class="col">
-                    <h1>{{ question.name }}</h1>
-                    <p class="small">Admin {{ question.askedAt|date('d.m.Y') }}</p>
-                    <p class="fs-6 fst-italic">{{ question.question }}</p>
-                </div>
-        </div>
 
-            <div class="row">
-{#                <div class="col-2">#}
-{#                    <p>Użytkownik</p>#}
-{#                    <p>tekst</p>#}
-{#                </div>#}
-                <div class="col">
+            <div class="col text-dark bg-gradient">
+                <h1 class="mb-0">{{ question.name }}</h1>
+                <small class="badge d-flex justify-content-end">{{ question.askedAt|date('d.m.Y, H:i') }}</small>
+                <hr class="mb-0 mt-0">
+                <p class="fs-6 fst-italic">{{ question.question|raw }}</p>
+            </div>
 
-                        {% for answer in question.answers %}
-                            <div class="mt-5 border">
-                                <p class="ms-2"> {{ answer.answeredAt|date('d.m.Y, H:i') }}</p>
-                                <p class="ms-2 me-3"> {{ answer.content }}</p>
+    </div>
+        {% for answer in question.answers %}
+            <div class="row mt-5 mb-4 ms-3 me-3">
+                <div class="row-cols-lg shadow bg-gradient bg-success text-center rounded-2">
+                    <u class="text-decoration-none fw-bold">
+                        {{ answer.owner.name }}
+                        {% if answer.owner.name == 'Admin' %}
+                            <div class="d-flex justify-content-center text-center">
+                                <p class="text-dark mb-0 mt-0 bg-danger bg-gradient col-2 text-center">Administrator</p>
                             </div>
-                        {% endfor %}
-                    {% endfor %}
+                        {% endif %}</u>
+                    <p class="mb-0"><small></small> {{ answer.owner.mycar }}</p>
                 </div>
-
+                <div class="col shadow small">
+                    <small class="badge d-flex justify-content-end">{{ answer.answeredAt|date('d.m.Y, H:i') }}</small>
+                    <hr class="mb-0 mt-0">
+                    <p class="mt-1 fs-6"> {{ answer.content|raw }}</p>
+                </div>
             </div>
+        {% endfor %}
+        {% endfor %}
 
-
-        <div class="mt-5 d-flex justify-content-end">
-            <button class="fs-5 btn btn-success" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    {% if app.user %}
+        <div class="mb-4 d-flex justify-content-end">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Dodaj komentarz
             </button>
         </div>
-        <div class="container mb-5 d-flex bottom-0 justify-content-center fixed-bottom">
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    {{ form_start(answer) }}
-                        {{ form_widget(answer) }}
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary ">Dodaj</button>
-                        </div>
-                    {{ form_end(answer) }}
+        <div class="collapse shadow" id="collapseExample">
+            <div class="card card-body">
+                {{ form_start(answer) }}
+                {{ form_row(answer.content) }}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success ">Dodaj</button>
                 </div>
+                {{ form_end(answer) }}
             </div>
         </div>
-
-
-    </div>
+    {% endif %}
+</div>
 
 {% endblock %}

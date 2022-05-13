@@ -3,11 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Question;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class QuestionType extends AbstractType
 {
@@ -15,10 +16,16 @@ class QuestionType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Tytuł',
-            ])
-            ->add('question', TextareaType::class, [
                 'label' => false,
+                'attr' => ['placeholder' => 'Tytuł'],
+            ])
+            ->add('question', CKEditorType::class, [
+                'label' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Pole tekstowe nie może być puste!',
+                    ]),
+                ]
             ])
         ;
     }

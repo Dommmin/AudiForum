@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,15 +40,21 @@ class QuestionRepository extends ServiceEntityRepository
         }
     }
 
-    public function findOneBySlug($slug)
+//    public function findOneBySlug($slug)
+//    {
+//        return $this->createQueryBuilder('m')
+//            ->where('m.slug = :slug')
+//            ->setParameter('slug', $slug)
+//            ->getQuery()
+//            ->getResult()
+//            ;
+//    }
+
+    public function findBySlugPager($slug): QueryBuilder
     {
         return $this->createQueryBuilder('m')
             ->where('m.slug = :slug')
             ->setParameter('slug', $slug)
-//            ->leftJoin('m.answer', 'answer')
-//            ->addSelect('answer')
-            ->getQuery()
-            ->getResult()
             ;
     }
 

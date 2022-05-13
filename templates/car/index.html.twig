@@ -1,34 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Audi - {{ parent() }}{% endblock %}
+{% block title %}{% for car in cars %} Audi {{ car.name }}{% endfor %}- {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
         <div class="mt-2 ms-5 fs-4">
             {% for car in cars %}
                 {% for model in models %}
-                    <a
-                        href="{{ path('new_question', {'slug': car.slug, 'name': model.name}) }}"
-                        class="btn btn-danger mb-3"
-                    >
-
-                <i class="fas fa-pencil-alt fa-xs"></i> <u class="text-decoration-none fw-bold">Dodaj wątek</u>
-            </a>
+                    {% if app.user %}
+                        <a
+                            href="{{ path('new_question', {'slug': car.slug, 'name': model.name}) }}"
+                            class="btn btn-danger mb-3"
+                        >
+                        <i class="fas fa-pencil-alt fa-xs"></i> <u class="text-decoration-none fw-bold">Dodaj wątek</u>
+                        </a>
+                    {% endif %}
                 {% endfor %}
             {% endfor %}
         </div>
 
-        <div class="mb-5 me-5 ms-5 justify-content-center border border-4 border-dark">
+        {% for car in cars %}
+            <div class="mb-5 me-5 ms-5 justify-content-center border border-4 border-dark">
 
             <div class="bg-dark bg-gradient text-light text-center">
-                <p class="fs-6 m-auto p-1">Wszystko związane z </p>
+                <p class="fs-6 m-auto p-1">Wszystko związane z {{ car.name }}</p>
             </div>
-        {% for car in cars %}
+
             {% for model in models %}
                 {% for question in model.question %}
                     <div class="bg-dark bg-gradient bg-opacity-75">
                         <a href="{{ path('show_question', {'car': car.slug, 'name': model.name, 'slug': question.slug}) }}" class="link-warning fs-3 text-decoration-none ms-2">{{ question.name }}</a>
-                        <p class="small text-break text-muted ms-2">Admin >> {{ question.askedAt|date('d.m.Y, H:i') }}</p>
+                        <p class="mb-0 small text-break text-muted ms-2">{{ question.owner.name }} <i class="fas fa-angle-double-right"></i> {{ question.askedAt|date('d.m.Y, H:i') }}</p>
                     </div>
                 {% endfor %}
             {% endfor %}

@@ -11,6 +11,8 @@ use App\Form\QuestionType;
 use App\Repository\AnswerRepository;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +35,7 @@ class QuestionController extends AbstractController
             $question->setQuestion($data->getQuestion());
             $question->setAskedAt(new \DateTime());
             $question->setModel($model);
+            $question->setOwner($this->getUser());
 
             $entityManager->persist($question);
             $entityManager->flush();
@@ -51,11 +54,17 @@ class QuestionController extends AbstractController
 
     #[Route('/{car}/{name}/show/{slug}', name: 'show_question')]
     #[ParamConverter('question', class: Question::class, options: ['mapping' => ['slug' => 'slug']])]
-    public function show(Question $question, QuestionRepository $questionRepository, Request $request, EntityManagerInterface $entityManager, string $slug, string $name, string $car, AnswerRepository $answerRepository): Response
+    public function show(Question $question, QuestionRepository $questionRepository, Request $request, EntityManagerInterface $entityManager, string $slug, string $name, string $car): Response
     {
-        $questions = $questionRepository->findOneBySlug($slug);
+        $queryBuilder = $questionRepository->findBySlugPager($slug);
 
-        $answers = $answerRepository->findAnswers($slug);
+//        $queryBuilder = $answerRepository->findAnswers($slug);
+
+        $pagerfanta = new Pagerfanta(
+            new QueryAdapter($queryBuilder)
+        );
+
+        $pagerfanta->setMaxPerPage(5);
 
         $form = $this->createForm(AnswerType::class);
 
@@ -67,6 +76,7 @@ class QuestionController extends AbstractController
             $answer->setContent($data->getContent());
             $answer->setAnsweredAt(new \DateTime);
             $answer->setQuestion($question);
+            $answer->setOwner($this->getUser());
 
             $entityManager->persist($answer);
             $entityManager->flush();
@@ -79,8 +89,8 @@ class QuestionController extends AbstractController
         }
 
         return $this->render('question/index.html.twig', [
-            'questions' => $questions,
-            'answers' => $answers,
+//            'questions' => $questions,
+            'pager' => $pagerfanta,
             'answer' =>  $form->createView(),
         ]);
     }

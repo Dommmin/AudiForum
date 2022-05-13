@@ -7,18 +7,23 @@
                 <h1 class="">Nowy Temat</h1>
             </div>
 
-            {{ form_start(question) }}
-            <div class="">
-                {{ form_row(question.name) }}
+            <div class="w-100">
+                {{ form_start(question) }}
+                <div class="d-flex justify-content-center row-cols-2">
+                    {{ form_row(question.name) }}
+                </div>
+
+                <div>
+                    {{ form_row(question.question) }}
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success">
+                        Wyślij
+                    </button>
+                </div>
+                {{ form_end(question) }}
             </div>
 
-            <div>
-                {{ form_row(question.question) }}
-            </div>
-            <button type="submit" class="btn btn-success">
-                Wyślij
-            </button>
-            {{ form_end(question) }}
         </div>
     </div>
 

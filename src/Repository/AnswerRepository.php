@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Answer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,17 +40,18 @@ class AnswerRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAnswers($question)
-    {
-        return $this->createQueryBuilder('m')
-            ->leftJoin('m.question', 'question')
-            ->addSelect('question')
-            ->where('m.question = :question')
-            ->setParameter('question', $question)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
+//    public function findAnswers($question)
+//    {
+//        return $this->createQueryBuilder('m')
+//            ->leftJoin('m.question', 'question')
+//            ->addSelect('question')
+//            ->where('m.question = :question')
+//            ->setParameter('question', $question)
+//            ->getQuery()
+//            ->getResult()
+//            ;
+//    }
+
 
 //    /**
 //     * @return Answer[] Returns an array of Answer objects

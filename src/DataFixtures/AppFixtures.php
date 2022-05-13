@@ -27,11 +27,15 @@ class AppFixtures extends Fixture
         $user->setEmail('admin@localhost.com');
         $user->setRoles(['ROLE_ADMIN']);
         $user->setPassword($this->passwordHasher->hashPassword($user, 'admin'));
+        $user->setName('Admin');
+        $user->setMyCar('Audi RS7');
 
         $user2 = new User();
         $user2->setEmail('john@localhost.com');
         $user2->setRoles(['ROLE_USER']);
         $user2->setPassword($this->passwordHasher->hashPassword($user, 'user'));
+        $user2->setName('John');
+        $user2->setMyCar('Audi A3');
 
         $manager->persist($user);
         $manager->persist($user2);
@@ -112,51 +116,76 @@ class AppFixtures extends Fixture
         $question->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question->setAskedAt(new \DateTime());
         $model1->addQuestion($question);
+        $question->setOwner($user);
 
         $question2 = new Question();
         $question2->setName('Lorem Ipsum');
         $question2->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question2->setAskedAt(new \DateTime());
+        $question2->setOwner($user);
+        $model1->addQuestion($question2);
+
 
         $question3 = new Question();
         $question3->setName('Lorem Ipsum');
         $question3->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question3->setAskedAt(new \DateTime());
+        $question3->setOwner($user);
+        $model1->addQuestion($question3);
+
 
         $question4 = new Question();
         $question4->setName('Lorem Ipsum');
         $question4->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question4->setAskedAt(new \DateTime());
+        $question4->setOwner($user);
+        $model1->addQuestion($question4);
+
 
         $question5 = new Question();
         $question5->setName('Lorem Ipsum');
         $question5->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question5->setAskedAt(new \DateTime());
+        $question5->setOwner($user);
+        $model2->addQuestion($question5);
+
 
         $question6 = new Question();
         $question6->setName('Lorem Ipsum');
         $question6->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question6->setAskedAt(new \DateTime());
+        $question6->setOwner($user);
+        $model2->addQuestion($question5);
+
 
         $question7 = new Question();
         $question7->setName('Lorem Ipsum');
         $question7->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question7->setAskedAt(new \DateTime());
+        $question7->setOwner($user2);
+        $model3->addQuestion($question7);
+
 
         $question8 = new Question();
         $question8->setName('Lorem Ipsum');
         $question8->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question8->setAskedAt(new \DateTime());
+        $question8->setOwner($user2);
+        $model1->addQuestion($question8);
 
         $question9 = new Question();
         $question9->setName('Lorem Ipsum');
         $question9->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question9->setAskedAt(new \DateTime());
+        $question9->setOwner($user2);
+        $model1->addQuestion($question9);
 
         $question10 = new Question();
         $question10->setName('Lorem Ipsum');
         $question10->setQuestion('It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).');
         $question10->setAskedAt(new \DateTime());
+        $question10->setOwner($user2);
+        $model2->addQuestion($question10);
 
 
         /* answers */
@@ -165,6 +194,7 @@ class AppFixtures extends Fixture
         $answer->setContent('Will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose.');
         $answer->setAnsweredAt(new \DateTime());
         $answer->setQuestion($question);
+        $answer->setOwner($user2);
 
 
         $manager->persist($car1);

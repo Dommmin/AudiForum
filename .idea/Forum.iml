@@ -85,6 +85,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofphp/proxy-manager-lts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofsymfony/ckeditor-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/expression-language" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pagerfanta/pagerfanta" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
