@@ -7,14 +7,7 @@
     <div class="row shadow-lg mb-5 rounded-2">
         {% for question in pager %}
             <div class="row-cols-auto text-center bg-gradient bg-dark text-light rounded-3">
-                <u class="text-decoration-none fw-bold">
-                    {{ question.owner.name }}
-                    {% if question.owner.name == 'Admin' %}
-                        <div class="d-flex justify-content-center text-center">
-                            <p class="text-dark mb-0 mt-0 bg-danger bg-gradient col-2 text-center">Administrator</p>
-                        </div>
-                    {% endif %}
-                </u>
+                <u class="text-decoration-none fw-bold">{{ question.owner.name }}</u>
                 <p class="mb-1"><small>{{ question.owner.mycar }}</small> </p>
             </div>
 
@@ -29,13 +22,7 @@
         {% for answer in question.answers %}
             <div class="row mt-5 mb-4 ms-3 me-3">
                 <div class="row-cols-lg shadow bg-gradient bg-success text-center rounded-2">
-                    <u class="text-decoration-none fw-bold">
-                        {{ answer.owner.name }}
-                        {% if answer.owner.name == 'Admin' %}
-                            <div class="d-flex justify-content-center text-center">
-                                <p class="text-dark mb-0 mt-0 bg-danger bg-gradient col-2 text-center">Administrator</p>
-                            </div>
-                        {% endif %}</u>
+                    <u class="text-decoration-none fw-bold">{{ answer.owner.name }}</u>
                     <p class="mb-0"><small>{{ answer.owner.mycar }}</small> </p>
                 </div>
                 <div class="col shadow small">
